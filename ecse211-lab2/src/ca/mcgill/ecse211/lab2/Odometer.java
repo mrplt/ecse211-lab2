@@ -62,16 +62,16 @@ public class Odometer implements Runnable {
   private static int leftMotorTachoCount = 0;
   private static int rightMotorTachoCount = 0;
   
-  private int lastleftMotorTachoCount = 0;
-  private int lastrightMotorTachoCount = 0;
+  private static int lastleftMotorTachoCount = 0;
+  private static int lastrightMotorTachoCount = 0;
   
-  private double leftDist;
-  private double rightDist;
-  
-  private double distDiff;
-  private double headingDiff;
-  private double dx;
-  private double dy;
+//  private double leftDist;
+//  private double rightDist;
+//  
+//  private double distDiff;
+//  private double headingDiff;
+//  private double dx;
+//  private double dy;
 
   /**
    * The odometer update period in ms.
@@ -105,7 +105,13 @@ public class Odometer implements Runnable {
    */
   public void run() {
     long updateStart, updateEnd;
+    double leftDist;
+    double rightDist;
     
+    double distDiff;
+    double headingDiff;
+    double dx;
+    double dy;
     odo = getOdometer();
 
     while (true) {

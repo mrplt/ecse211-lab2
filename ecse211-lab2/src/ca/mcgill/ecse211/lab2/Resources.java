@@ -32,7 +32,7 @@ public class Resources {
   /**
    * The speed at which the robot rotates in degrees per second.
    */
-  public static final int ROTATE_SPEED = 50;
+  public static final int ROTATE_SPEED = 150;
   
   /**
    * The motor acceleration in degrees per second squared.

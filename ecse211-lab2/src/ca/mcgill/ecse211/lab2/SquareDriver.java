@@ -33,6 +33,8 @@ public class SquareDriver {
 
           leftMotor.rotate(convertDistance(3 * TILE_SIZE), true);
           rightMotor.rotate(convertDistance(3 * TILE_SIZE), false);
+//          leftMotor.rotate(convertDistance(91.44), true);
+//          rightMotor.rotate(convertDistance(91.44), false);
 
           // turn 90 degrees clockwise
           leftMotor.setSpeed(ROTATE_SPEED);
@@ -63,6 +65,6 @@ public class SquareDriver {
    * @return the wheel rotations necessary to rotate the robot by the angle
    */
   public static int convertAngle(double angle) {
-    return convertDistance(Math.PI * TRACK * angle / 360.0);
+    return convertDistance(Math.PI * 13.6 * angle / 360.0);
   }
 }
