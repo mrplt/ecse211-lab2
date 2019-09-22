@@ -65,6 +65,6 @@ public class SquareDriver {
    * @return the wheel rotations necessary to rotate the robot by the angle
    */
   public static int convertAngle(double angle) {
-    return convertDistance(Math.PI * 13.6 * angle / 360.0);
+    return convertDistance(Math.PI * TRACK * angle / 360.0);
   }
 }

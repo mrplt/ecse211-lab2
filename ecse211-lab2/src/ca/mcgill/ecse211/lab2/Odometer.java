@@ -107,6 +107,7 @@ public class Odometer implements Runnable {
     long updateStart, updateEnd;
     double leftDist;
     double rightDist;
+    double dtheta;
     
     double distDiff;
     double headingDiff;
@@ -132,13 +133,21 @@ public class Odometer implements Runnable {
      headingDiff = (leftDist - rightDist)/TRACK;
      
        theta += headingDiff;
-     
+       if ( theta > (2*Math.PI))
+       {
+           theta = theta % (2*Math.PI);
+       }
+       if (theta < 0){
+           theta = theta + 2*Math.PI;
+       }
+       
        //Calculate the total displacement in x and y
        dx = distDiff * (Math.sin(theta));
        dy = distDiff * (Math.cos(theta));
        
+       dtheta = (theta * 180) /  Math.PI;
     // TODO Update odometer values with new calculated values
-       odo.update(dx,dy,theta);
+       odo.update(dx,dy,dtheta);
      
   
       // this ensures that the odometer only runs once every period
