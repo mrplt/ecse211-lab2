@@ -4,6 +4,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+
 //static import to avoid duplicating variables and make the code easier to read
 import static ca.mcgill.ecse211.lab2.Resources.*;
 
@@ -107,12 +108,13 @@ public class Odometer implements Runnable {
     long updateStart, updateEnd;
     double leftDist;
     double rightDist;
-    double dtheta;
+    double dtheta = 0;
     
     double distDiff;
     double headingDiff;
     double dx;
     double dy;
+    double dHeadingDiff;
     odo = getOdometer();
 
     while (true) {
@@ -126,28 +128,21 @@ public class Odometer implements Runnable {
      leftDist = (Math.PI * WHEEL_RAD * (leftMotorTachoCount - lastleftMotorTachoCount))/180;
      rightDist = (Math.PI * WHEEL_RAD * (rightMotorTachoCount - lastrightMotorTachoCount))/180;
      
-     lastleftMotorTachoCount = leftMotorTachoCount;
+     lastleftMotorTachoCount = leftMotorTachoCount; 
      lastrightMotorTachoCount = rightMotorTachoCount;
      
      distDiff = 0.5 * (leftDist + rightDist);
      headingDiff = (leftDist - rightDist)/TRACK;
-     
-       theta += headingDiff;
-       if ( theta > (2*Math.PI))
-       {
-           theta = theta % (2*Math.PI);
-       }
-       if (theta < 0){
-           theta = theta + 2*Math.PI;
-       }
+      
+       dtheta += headingDiff;
        
        //Calculate the total displacement in x and y
-       dx = distDiff * (Math.sin(theta));
-       dy = distDiff * (Math.cos(theta));
+       dx =  distDiff * (Math.sin(dtheta));
+       dy =  distDiff * (Math.cos(dtheta));
        
-       dtheta = (theta * 180) /  Math.PI;
+       dHeadingDiff = (headingDiff * 180) /  Math.PI;
     // TODO Update odometer values with new calculated values
-       odo.update(dx,dy,dtheta);
+       odo.update(dx,dy,dHeadingDiff);
      
   
       // this ensures that the odometer only runs once every period

@@ -39,27 +39,27 @@ private float[] colorValue;
     //Retrieve a color sample and store it at position 0 in the colorValue array
       colorSample.fetchSample(colorValue, 0);
       
-      if(colorValue[0] <= 0.5){//If a black line is crossed
-        if(odometer.getXYT()[2] < 1){ //going straight
+      if(colorValue[0] <= 0.25){//If a black line is crossed
+       if(odometer.getXYT()[2] < 1){ //going straight
             Sound.beep();
             //Update y position when sensor crosses a black line while going straight
 //            odometer.setY();
         }
-        else if(odometer.getXYT()[2]>0 && odometer.getXYT()[2]<Math.PI/2){ //going right
+        else if(odometer.getXYT()[2]>0 && odometer.getXYT()[2]<91){ //going right
             Sound.beep();
             //Update x position when sensor crosses a black line while going right
 //            odometer.setX();
         }
-        else if(odometer.getXYT()[2]>Math.PI/2 && odometer.getXYT()[2]<Math.PI){//going backwards
+        else if(odometer.getXYT()[2]<181){//going backwards
             Sound.beep();
             //Update x position when sensor crosses a black line while going backwards
 //            odometer.setY();
         }
-        else if(odometer.getXYT()[2]-3*Math.PI/2<0){//going left
+        else if(odometer.getXYT()[2]<271){//going left
             Sound.beep();
             //Update x position when sensor crosses a black line while going left
 //            odometer.setX();
-        }
+        } 
     }
 
       // this ensures the odometry correction occurs only once every period
