@@ -16,11 +16,11 @@ public int counterX = 0;
 public int counterY = 0;
 public double updateX = 0;
 public double updateY = 0;
-private static double NORTH = 1.5;  // threshold of theta value to determine robot is heading north
-private static double EAST = 91;    // threshold of theta value to determine robot is heading east
-private static double SOUTH = 181;  // threshold of theta value to determine robot is heading south
-private static double WEST = 271;   // threshold of theta value to determine robot is heading west
-
+private static double NORTH = 1.0;  // threshold of theta value to determine robot is heading north
+private static double EAST = 91.0;    // threshold of theta value to determine robot is heading east
+private static double SOUTH = 181.0;  // threshold of theta value to determine robot is heading south
+private static double WEST = 271.0;   // threshold of theta value to determine robot is heading west
+private static double LIGHT_INTENSITY = 0.3; //light intensity threshold
   /*
    * Here is where the odometer correction code should be run.
    */
@@ -35,8 +35,8 @@ private static double WEST = 271;   // threshold of theta value to determine rob
       correctionStart = System.currentTimeMillis();
       
       colorSample.fetchSample(colorValue, 0); //Retrieve a color sample and store it at position 0 in the colorValue array
-      if(colorValue[0] <= 0.2){   //If a black line is crossed
-       
+      if(colorValue[0] <= LIGHT_INTENSITY){   //If a black line is crossed
+       Sound.beep();
        if(odometer.getXYT()[2] < NORTH){ //going straight
             counterY++; //increase counter for y when robot crosses a line
             Sound.beep();
